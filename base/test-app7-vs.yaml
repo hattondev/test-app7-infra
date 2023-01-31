@@ -1,0 +1,22 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: test-app7-vs
+  labels:
+    app: test-app7
+    version: 0.0.1
+    backstage.io/kubernetes-id: test-app7
+spec:
+  gateways:
+  - istio-gateway/apps-gateway
+  hosts:
+  - test-app7.apps.wwtlab.net
+  http:
+  - name: primary
+    route:
+    - destination:
+        host: test-app7-svc
+        port:
+          number: 80
+      weight: 100
